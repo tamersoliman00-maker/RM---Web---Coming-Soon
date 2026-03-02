@@ -1,41 +1,82 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RM — Coming Soon</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23031C12'/></svg>">
+
   <style>
-    * {
+    html, body {
       margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      height: 100%;
+      background: #F4EFE6; 
+      overflow: hidden;
     }
 
-    body {
-      background: #000;
-      font-family: Arial, sans-serif;
+    .wrap {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .container {
-      width: 100%;
-    }
-
-    .container img {
-      width: 100%;
-      height: auto;
+    .page {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain; 
       display: block;
+    }
+
+    .hotspot {
+      position: absolute;
+      border-radius: 999px;
+      cursor: pointer;
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <img src="RM1.jpg" alt="Image 1">
-  <a href="https://www.instagram.com/mandarincruiseline?igsh=MXg3ZW5waHRuandhNQ==" target="_blank">
-  <img src="RM2.jpg" alt="mandarincruiseline">
-</a>
-     <a href="https://www.instagram.com/theroyalmandarin?igsh=cm9zOWU0OW85Y3Vq" target="_blank">
-  <img src="RM2.jpg" alt="theroyalmandarin">
-</a>
+  <div class="wrap">
+    <img class="page" id="page" src="page1.png" alt="Coming soon cover" />
+
+    <a class="hotspot" id="royalBtn" href="royal.html"></a>
+    <a class="hotspot" id="grandBtn" href="grand.html"></a>
   </div>
+
+  <script>
+    (function () {
+      const img = document.getElementById('page');
+      const royal = document.getElementById('royalBtn');
+      const grand = document.getElementById('grandBtn');
+
+      const frac = {
+        royal: { x: 0.062, y: 0.842, w: 0.205, h: 0.095 },
+        grand: { x: 0.715, y: 0.842, w: 0.205, h: 0.095 }
+      };
+
+      function place(el, f) {
+        const r = img.getBoundingClientRect();
+        el.style.left   = (r.left + r.width  * f.x) + 'px';
+        el.style.top    = (r.top  + r.height * f.y) + 'px';
+        el.style.width  = (r.width  * f.w) + 'px';
+        el.style.height = (r.height * f.h) + 'px';
+      }
+
+      function layout() {
+        place(royal, frac.royal);
+        place(grand, frac.grand);
+      }
+
+      if (img.complete) layout();
+      else img.addEventListener('load', layout);
+
+      window.addEventListener('resize', layout);
+    })();
+  </script>
 </body>
 </html>
