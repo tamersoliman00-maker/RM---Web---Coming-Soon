@@ -1,6 +1,4 @@
-
 <!doctype html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -12,35 +10,43 @@
 
 html, body {
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;   
+  overflow-x: hidden; /* امنع سكرول عرض */
+  overflow-y: auto;   /* سكرول طول */
 }
 
-.page {
-  position:fixed;
-  inset:0;
-  width:100vw;
-  height:100vh;
-  object-fit:cover;
+.wrapper{
+  position: relative;
+  width: 100%;
 }
 
-.hotspot {
-  position:fixed;
+/* خلي الصورة تتمدد بعرض الشاشة وتاخد ارتفاعها الطبيعي */
+.page{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* hotspots تبقى فوق الصورة */
+.hotspot{
+  position:absolute;
   cursor:pointer;
+  display:block;
 }
 </style>
-
 </head>
 
 <body>
 
-<img src="page1.png" class="page" id="page">
-
-<a id="royalBtn" class="hotspot" href="royal.html"></a> <a id="grandBtn" class="hotspot" href="grand.html"></a>
+<div class="wrapper" id="wrap">
+  <img src="page1.png" class="page" id="page" alt="page">
+  <a id="royalBtn" class="hotspot" href="royal.html" aria-label="Royal"></a>
+  <a id="grandBtn" class="hotspot" href="grand.html" aria-label="Grand"></a>
+</div>
 
 <script>
 (function () {
   const img = document.getElementById('page');
+  const wrap = document.getElementById('wrap');
   const royal = document.getElementById('royalBtn');
   const grand = document.getElementById('grandBtn');
 
@@ -54,14 +60,18 @@ html, body {
 
   function place(el, f) {
     const r = img.getBoundingClientRect();
+    const w = r.width;
+    const h = r.height;
 
-    el.style.left   = (r.left + r.width  * (f.x - padding)) + 'px';
-    el.style.top    = (r.top  + r.height * (f.y - padding)) + 'px';
-    el.style.width  = (r.width  * (f.w + padding*2)) + 'px';
-    el.style.height = (r.height * (f.h + padding*2)) + 'px';
+    el.style.left   = (w * (f.x - padding)) + 'px';
+    el.style.top    = (h * (f.y - padding)) + 'px';
+    el.style.width  = (w * (f.w + padding*2)) + 'px';
+    el.style.height = (h * (f.h + padding*2)) + 'px';
   }
 
   function layout() {
+    // مهم: نخلي wrapper نفس مقاس الصورة عشان absolute يظبط
+    wrap.style.width = img.clientWidth + 'px';
     place(royal, frac.royal);
     place(grand, frac.grand);
   }
