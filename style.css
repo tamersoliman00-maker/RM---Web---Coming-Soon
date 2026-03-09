@@ -1,0 +1,177 @@
+
+/* GLOBAL */
+*{
+box-sizing:border-box;
+}
+
+html,body{
+margin:0;
+height:100%;
+font-family:Georgia, serif;
+background:#e9dcc6;
+overflow-x:hidden;
+}
+
+/* HERO BACKGROUND */
+.hero{
+position:relative;
+height:100svh;
+min-height:100svh;
+background:url("assets/bg.png") center/cover no-repeat;
+overflow:hidden;
+}
+
+/* TITLE */
+.hero-title{
+position:absolute;
+top:12%;
+left:50%;
+transform:translateX(-50%);
+text-align:center;
+width:90%;
+}
+
+.hero-title h1{
+margin:0;
+font-size:clamp(28px,4vw,72px);
+line-height:.95;
+font-weight:400;
+text-transform:uppercase;
+letter-spacing:.02em;
+}
+
+/* BOTTOM BLOCKS */
+.bottom-item{
+position:absolute;
+display:flex;
+flex-direction:column;
+align-items:center;
+gap:3px;
+}
+
+/* LEFT */
+.royal-item{
+left:6%;
+bottom:5%;
+}
+
+/* RIGHT */
+.grand-item{
+right:6%;
+bottom:5%;
+}
+
+/* LABEL IMAGE */
+.label-img{
+width:min(31vw,340px);
+height:auto;
+filter:
+drop-shadow(0 2px 0 rgba(255,255,255,.15))
+drop-shadow(0 8px 12px rgba(0,0,0,.20))
+drop-shadow(0 18px 28px rgba(0,0,0,.18));
+}
+
+/* BUTTON IMAGE */
+.btn-img{
+width:min(14.4vw,202px); /* 60% size */
+height:auto;
+margin-top:-2px;
+filter:
+drop-shadow(0 2px 0 rgba(255,255,255,.20))
+drop-shadow(0 5px 0 rgba(70,44,24,.18))
+drop-shadow(0 12px 16px rgba(0,0,0,.24))
+drop-shadow(0 20px 30px rgba(0,0,0,.18));
+}
+
+/* BUTTON LINK EFFECT */
+.btn-img-link{
+display:inline-block;
+transition:transform .2s ease;
+}
+
+.btn-img-link:hover{
+transform:translateY(-2px) scale(1.02);
+}
+
+/* ===================== */
+/* MOBILE IMPROVEMENTS */
+/* ===================== */
+
+@media(max-width:768px){
+
+.hero{
+height:auto;
+min-height:100svh;
+display:flex;
+flex-direction:column;
+justify-content:flex-start;
+padding-top:40px;
+padding-left:20px;
+padding-right:20px;
+}
+
+/* title responsive */
+.hero-title{
+position:relative;
+top:auto;
+left:auto;
+transform:none;
+margin-bottom:2vh;
+}
+
+.hero-title h1{
+font-size:clamp(24px,7vw,40px);
+line-height:1.05;
+}
+
+/* blocks stacked */
+.bottom-item{
+position:relative;
+left:auto;
+right:auto;
+bottom:auto;
+margin:auto;
+top:12vh; /* pushes below mid screen */
+gap:4px;
+}
+
+/* smaller labels */
+.label-img{
+width:65vw;
+max-width:260px;
+}
+
+/* smaller buttons */
+.btn-img{
+width:48vw;
+max-width:200px;
+}
+
+/* spacing between sections */
+.royal-item{
+margin-bottom:12px;
+}
+
+.grand-item{
+margin-top:8px;
+}
+
+}
+
+/* SMALL PHONES */
+
+@media(max-width:420px){
+
+.hero-title h1{
+font-size:22px;
+}
+
+.label-img{
+width:72vw;
+}
+
+.btn-img{
+width:52vw;
+}
+
+}
